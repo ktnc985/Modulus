@@ -72,8 +72,8 @@ to allow the user to compare and choose the most suitable match.
 |Week 1 (15th May) | Design & Implementation of first iteration of front end UI/UX | Pull and format data from NUS mods API and Modify API.   Manually extract pre-approved mappings from Soc webpage.| |
 |Week 2 (22nd May) | Design & Implementation of first iteration of front end UI/UX |Pull and format data from NUS mods API and Modify API. Automate extracting pre-approved module mappings from SoC website |  |
 |Week 3 (29th May) | Design & Implementation of first iteration of front end UI/UX | Pull and format data from NUS mods API and Modify API. Automate extracting pre-approved module mappings from SoC website | Evaluation Milestone 1|
-|Week 4 (5th June) | Set up & integrate firebase database | Make changes to UI/UX based on user feedback| |
-|Week 5 (12th June) | Set up & integrate firebase database | Make changes to UI/UX based on user feedback| |
+|Week 4 (5th June) | Set up & integrate mongoDB database | Make changes to UI/UX based on user feedback| |
+|Week 5 (12th June) | Set up & integrate mongoDB database | Make changes to UI/UX based on user feedback| |
 |Week 6 (19th June) | Implement & Improve on NLP algorithm | Make changes to UI/UX based on user feedback. Testing of system with dummy data| |
 |Week 7 (26th June) | Implement & Improve on NLP algorithm | Make changes to UI/UX based on user feedback. Testing of system with dummy data |Evaluation Milestone 2|
 |Week 8 (3rd July)| Implement & Improve on NLP algorithm | Make changes to UI/UX based on user feedback. If NLP algorithm is already producing acceptable results, begin integration into the full system and expand the system to support another faculty | |
