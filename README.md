@@ -47,7 +47,7 @@ Sample json format:
         "NUSModuleCode": "CS1010E",
         "PUModuleCode": "FE1008",
         "ModuleName": "Computing",
-        "Syllabus": "<insert module description here>"
+        "PUSyllabus": "<insert module description here>"
         “Link”: “http://www.cee.ntu.edu.sg/Students/Undergraduate/Curriculum/Pages/courses/FE1008.aspx”,
         "UniversityName": "Nanyang Technological University",
         “Region”: “Asia”,
