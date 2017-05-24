@@ -43,19 +43,18 @@ Sample json format:
 
 ``` Javascript
     [{
-      {
         "NUSModuleCode": "CS1010E",
         "PUModuleCode": "FE1008",
         "ModuleName": "Computing",
-        "PUSyllabus": "<insert module description here>"
-        “Link”: “http://www.cee.ntu.edu.sg/Students/Undergraduate/Curriculum/Pages/courses/FE1008.aspx”,
+        "PUSyllabus": "<insert module description here>",
+        "Link": "http://www.cee.ntu.edu.sg/Students/Undergraduate/Curriculum/Pages/courses/FE1008.aspx",
         "UniversityName": "Nanyang Technological University",
-        “Region”: “Asia”,
+        "Region": "Asia",
         "Similarity": 50,
         "PrevMatch": true
       },
      ...
-    }]
+    ]
 ```
 ## UI/UX (implemented using Blaze/MeteorJS)
 Users can search for modules by module code or module name and filter the results by region and PUs.
