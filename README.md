@@ -1,4 +1,4 @@
-# NUSAtlas
+# Modulus
 # Introduction:
 The objective of this project is to make the module mapping process more convenient for students going for SEP/NOC.
 
