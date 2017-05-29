@@ -1,0 +1,26 @@
+<template name="search">
+  <div class="search-box" id="searches">
+  	<form>
+  		<input type="text" class="search rounded" placeholder="Search for a module" name="NUSModCode" autocomplete="off">
+  	</form>
+  </div>
+
+  <div class="filter-box" id="filters">
+      Filter by:
+        <p>Region: 
+        <select id="category-select">
+            <option disabled="disabled" selected="selected">Please Select</option> 
+            <option value="region">Southeast Asia</option>
+            <option value="PU">Others</option>
+          </select>
+        </p>
+          
+        <p>Partner university:
+        <select id="category-select">
+          <option disabled="disabled" selected="selected">Please Select</option> 
+          <option value="region">NTU</option>
+          <option value="PU">Others</option>
+        </select>
+        </p>
+  </div>        
+</template>  
