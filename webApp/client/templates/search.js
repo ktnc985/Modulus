@@ -1,8 +1,8 @@
 Template.search.events({
   'submit form': function (event) {
-  	event.preventDefault();
+    event.preventDefault();
 
-  	// Get value from form element
+    // Get value from form element
     //const target = event.target;
     //const text = target.text.value;
 
