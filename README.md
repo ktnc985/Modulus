@@ -1,4 +1,18 @@
 # Modulus
+
+#Setup:
+To build the project, make sure you have meteor installed.
+After that, clone the repositry and run the following commands:
+```
+$ cd Modulus
+$ meteor
+```
+#Linting:
+To run the linter, execute the following command:
+```
+$ meteor npm run lint -s
+```
+
 # Introduction:
 The objective of this project is to make the module mapping process more convenient for students going for SEP/NOC.
 
