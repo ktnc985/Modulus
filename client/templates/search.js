@@ -3,14 +3,12 @@ Template.search.events({
     event.preventDefault();
 
     // Get value from form element
-    //const target = event.target;
-    //const text = target.text.value;
+    // const target = event.target;
+    // const text = target.text.value;
 
     Router.go('results');
-  }
+  },
 });
-
-
 /*
 
 an example of form submission

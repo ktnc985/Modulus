@@ -1,30 +1,27 @@
 import { Template } from 'meteor/templating';
- 
+import { Meteor } from 'meteor/meteor';
+
 import { Modules } from '../../collections/modules.js';
 
-import { Meteor } from 'meteor/meteor';
-Template.results.onCreated(function(){
-    Meteor.subscribe('modules');
+Template.results.onCreated(function() {
+  Meteor.subscribe('modules');
 });
 
 Template.results.helpers({
   modules() {
-    console.log(Modules.find({}));
-    return Modules.find({});
+    return (Modules.find({}));
   },
 
-  number:function(module){
-
-    console.log(module.NUSModuleCode);
-    return '\"' + module.NUSModuleCode + '\"';
+  number(module) {
+    return (`"${module.NUSModuleCode}"`);
   },
 
-  id:function(module){
-    return ('\"#' + module.NUSModuleCode + '\"');
+  id(module) {
+    return (`"#${module.NUSModuleCode}"`);
   },
 
-  print:function(module){
+  print(module) {
     console.log(module);
     console.log(module.NUSModuleCode);
-  }
+  },
 });

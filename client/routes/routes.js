@@ -5,13 +5,11 @@ Router.route( 'modules/:modCode/PUModCode', function() {
   var modCode   = this.params.modCode,
       query  = this.request.query,
       fields = {};
-  // taking the query parameters passed with the GET request (in this case, just one field) and 
+  // taking the query parameters passed with the GET request (in this case, just one field) and
   // dynamically creating a MongoDB projection to pass to our findOne query
   fields[ query.field ] = query.field;
-  
-  //have to change findOne mtd in later stages to find any mods abv 50% match 
-  var getMod = Meteor.users.findOne( { "PUModCode.NUSModuleCode": modCode }, { fields: fields } ); 
-  
+  //have to change findOne mtd in later stages to find any mods abv 50% match
+  var getMod = Meteor.users.findOne( { "PUModCode.NUSModuleCode": modCode }, { fields: fields } );
   if ( getMod ) {
     this.response.statusCode = 200;
     this.response.end( getMod.PUModCode );
@@ -36,12 +34,12 @@ Router.route( 'index', {
 */
 
 Router.route('/', {
-  template: 'index'
+  template: 'index',
 });
 
 
 Router.route('results', {
-  template: 'results'
+  template: 'results',
 });
 
 /*
