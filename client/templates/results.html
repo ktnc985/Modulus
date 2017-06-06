@@ -1,15 +1,14 @@
 <template name="results">
-    <img class="logo" width="170" src="Modulus_logo.png" alt="Modulus_logo">
+  <img class="logo" width="170" src="Modulus_logo.png" alt="Modulus_logo">
     <div class="resultsHeader">
-        <h3>Results</h3>
+      <h3>Results</h3>
     </div>
 
     <div class="resultsSearch">
-        {{> search}}
-        {{#each module in modules}}
-            {{print module}}
-            {{> mapping module}}    
-        {{/each}}
+      {{> search}}
+      {{#each module in modules}}
+          {{print module}}
+          {{> mapping module}}    
+      {{/each}}
     </div>
-
 </template>
