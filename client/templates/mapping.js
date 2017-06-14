@@ -4,8 +4,9 @@ Template.mapping.helpers({
   id(code) {
     return (`#${code}`);
   },
-
-  number(code) {
-    return (code);
-  },
+  wasPrevMatch(boolValue) {
+  	if (boolValue) {
+  		return true;
+  	}
+  }
 });
