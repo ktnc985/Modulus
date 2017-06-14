@@ -1,6 +1,22 @@
-import { Meteor } from 'meteor/meteor';
-import { Modules } from '../collections/modules.js';
+Meteor.publish( 'modules', function( search ) {
+  check( search, Match.OneOf( String, null, undefined ) );
 
-Meteor.publish('modules', function() {
-  return Modules.find();
+  let query      = {},
+      projection = { limit: 10, sort: { NUSModuleCode: 1 } };
+
+  if ( search ) {
+    let regex = new RegExp( search, 'i' );
+
+    query = {
+      $or: [
+        { NUSModuleCode: regex },
+        { PUModuleCode: regex },
+        { UniversityName: regex }
+      ]
+    };
+
+    projection.limit = 100;
+  }
+
+  return Modules.find( query, projection );
 });
