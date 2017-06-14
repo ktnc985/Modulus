@@ -65,3 +65,13 @@ let ModulesSchema = new SimpleSchema({
 });
 
 Modules.attachSchema( ModulesSchema );
+
+Meteor.startup(function() {
+  if (Modules.find().count() === 0) {
+    [{ NUSModuleCode: 'CS1010E', PUModuleCode: 'FE1008', ModuleName: 'A', PUSyllabus: 'a', Link: 'www.a.com', UniversityName: 'UniA', Region: 'Southeast Asia',Similarity: 50, PrevMatch: true},
+     { NUSModuleCode: 'CS1010F', PUModuleCode: 'FE1009', ModuleName: 'B', PUSyllabus: 'b', Link: 'www.b.com', UniversityName: 'UniB', Region: 'Southeast Asia',Similarity: 65, PrevMatch: false},
+     { NUSModuleCode: 'CS1010G', PUModuleCode: 'FE1010', ModuleName: 'C', PUSyllabus: 'c', Link: 'www.c.com', UniversityName: 'UniC', Region: 'Others',Similarity: 40, PrevMatch: true},
+     { NUSModuleCode: 'CS1010H', PUModuleCode: 'FE1011', ModuleName: 'D', PUSyllabus: 'd', Link: 'www.d.com', UniversityName: 'UniD', Region: 'Others',Similarity: 0, PrevMatch: false}]
+    .forEach((module) => { Modules.insert(module); });
+  }
+});
