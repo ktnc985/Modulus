@@ -1,3 +1,3 @@
 Router.configure({
-    noRoutesTemplate: 'noRoutes'
+  noRoutesTemplate: 'noRoutes',
 });

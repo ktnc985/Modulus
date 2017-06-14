@@ -5,8 +5,9 @@ Template.mapping.helpers({
     return (`#${code}`);
   },
   wasPrevMatch(boolValue) {
-  	if (boolValue) {
-  		return true;
-  	}
-  }
+    if (boolValue) {
+      return true;
+    }
+    return false;
+  },
 });

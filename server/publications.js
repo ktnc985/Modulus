@@ -1,22 +1,22 @@
-Meteor.publish( 'modules', function( search ) {
-  check( search, Match.OneOf( String, null, undefined ) );
+Meteor.publish('modules', function(search) {
+  check(search, Match.OneOf(String, null, undefined));
 
-  let query      = {},
-      projection = { limit: 10, sort: { NUSModuleCode: 1 } };
+  let query = {};
+  let projection = { limit: 10, sort: { NUSModuleCode: 1 } };
 
-  if ( search ) {
-    let regex = new RegExp( search, 'i' );
+  if (search) {
+    let regex = new RegExp(search, 'i');
 
     query = {
       $or: [
         { NUSModuleCode: regex },
         { PUModuleCode: regex },
-        { UniversityName: regex }
-      ]
+        { UniversityName: regex },
+      ],
     };
 
     projection.limit = 100;
   }
 
-  return Modules.find( query, projection );
+  return Modules.find(query, projection);
 });
