@@ -1,22 +1,22 @@
-import { Mongo } from 'meteor/mongo';
+Modules = new Mongo.Collection( 'modules' );
 
-export const Modules = new Mongo.Collection('Modules');
-
-if (Meteor.isServer) {
-  if (Modules.find().count() < 1) {
-    [{ NUSModuleCode: 'CS1010E', PUModuleCode: 'FE1008' },
-     { NUSModuleCode: 'CS1010F', PUModuleCode: 'FE1009' },
-     { NUSModuleCode: 'CS1010G', PUModuleCode: 'FE1010' },
-     { NUSModuleCode: 'CS1010H', PUModuleCode: 'FE1011' }]
-    .forEach((module) => { Modules.insert(module); });
-  }
+if ( Meteor.isServer ) {
+  Modules._ensureIndex( { NUSModuleCode: 1, PUModuleCode: 1, UniversityName: 1 } );
 }
 
-/*
-Modules = new Meteor.Collection( 'modules');
+Modules.allow({
+  insert: () => false,
+  update: () => false,
+  remove: () => false
+});
 
-// collection2 package will validate data against the rules defined here before insertion
-var ModulesSchema = new SimpleSchema({
+Modules.deny({
+  insert: () => true,
+  update: () => true,
+  remove: () => true
+});
+
+let ModulesSchema = new SimpleSchema({
   "NUSModuleCode": {
     type: String,
     defaultValue: "",
@@ -65,4 +65,3 @@ var ModulesSchema = new SimpleSchema({
 });
 
 Modules.attachSchema( ModulesSchema );
-*/
