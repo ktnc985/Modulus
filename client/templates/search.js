@@ -1,28 +1,45 @@
-Template.search.events({
-  'submit form': function (event) {
-    event.preventDefault();
+Template.search.onCreated(() => {
+  let template = Template.instance();
 
-  // Get value from form element
-  // const target = event.target;
-  // const text = target.text.value;
-  Router.go('results');
-  }
-});
-/*
+  template.searchQuery = new ReactiveVar();
+  template.searching = new ReactiveVar(false);
 
-an example of form submission
-
-Template.addList.events({
-  'submit form': function(event){
-    event.preventDefault();
-    var listName = $('[name=listName]').val();
-    Lists.insert({
-      name: listName
-    }, function(error, results){
-      Router.go('listPage', { _id: results });
+  template.autorun(() => {
+    template.subscribe('modules', template.searchQuery.get(), () => {
+      setTimeout(() => {
+        template.searching.set(false);
+      }, 300);
     });
-    $('[name=listName]').val('');
-  }
+  });
 });
 
-*/
+Template.search.helpers({
+  searching() {
+    return Template.instance().searching.get();
+  },
+  query() {
+    return Template.instance().searchQuery.get();
+  },
+  modules() {
+    let modules = Modules.find();
+    if (modules) {
+      return modules;
+    }
+    return null;
+  },
+});
+
+Template.search.events({
+  'keyup [name="search"]'(event, template) {
+    let value = event.target.value.trim();
+
+    if (value !== '' && event.keyCode === 13) {
+      template.searchQuery.set(value);
+      template.searching.set(true);
+    }
+
+    if (value === '') {
+      template.searchQuery.set(value);
+    }
+  },
+});

@@ -1,16 +1,27 @@
 <template name = "mapping">
   <div class = "panel-group">
-    <div class = "panel panel-default">
+    <!-- add this to css to change cursor pointer
+    .panel-heading {
+    cursor: pointer;
+    }
+    -->
+    <div class = "panel panel-default" data-toggle = "collapse" href= {{id PUModuleCode}}>
       <h4 class = "panel-title">
-        <a data-toggle = "collapse" href= {{id PUModuleCode}}><span>{{PUModuleCode}}</span></a>
-        <div class="similarity-index"> 
-          <p>50% &#10004;</p>
+        <a>
+        <span><strong>{{PUModuleCode}}</strong> {{ModuleName}}</span></a>
+        <div class="similarity-index pull-right"> 
+          <p>
+          {{#if wasPrevMatch PrevMatch}}
+            &#10004;
+          {{/if}}
+          {{Similarity}}%
+          </p>
         </div>
-        <p>NTU</p>                    
+        <p>{{UniversityName}}</p>                    
       </h4>
     </div>
-    <div id = {{number PUModuleCode}} class = "panel-collapse collapse">
-      <div class = "panel-body">-Module details-</div>
+    <div id = {{PUModuleCode}} class = "panel-collapse collapse">
+      <div class = "panel-body">{{PUSyllabus}}</div>
     </div>
   </div>
 </template>
