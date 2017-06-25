@@ -1,7 +1,7 @@
 Modules = new Mongo.Collection('modules');
 
 if (Meteor.isServer) {
-  Modules._ensureIndex({ NUSModuleCode: 1, PUModuleCode: 1, UniversityName: 1 });
+  Modules._ensureIndex({ NUSModuleCode: 1});
 }
 
 Modules.allow({
@@ -66,6 +66,7 @@ let ModulesSchema = new SimpleSchema({
 
 Modules.attachSchema(ModulesSchema);
 
+/*
 Meteor.startup(function() {
   if (Modules.find().count() === 0) {
     [{ NUSModuleCode: 'CS1010E', PUModuleCode: 'FE1008', ModuleName: 'A', PUSyllabus: 'a', Link: 'www.a.com', UniversityName: 'UniA', Region: 'Southeast Asia', Similarity: 50, PrevMatch: true },
@@ -75,3 +76,9 @@ Meteor.startup(function() {
     .forEach((module) => { Modules.insert(module); });
   }
 });
+*/
+
+if (Modules.find().count() === 0) {
+  var data = JSON.parse(Assets.getText("NTUComparisons.json"));
+  data.forEach((module) => { Modules.insert(module); });
+}
