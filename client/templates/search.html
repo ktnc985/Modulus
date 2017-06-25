@@ -1,8 +1,25 @@
 <template name="search">
-  <div class="page-header clearfix">
-    <h4 class="pull-left">Results</h4>
-    <div class="pull-right">
-      <input type="text" name="search" class="form-control" width="250px" placeholder="Search for a module...">
+  <div class="search-container">
+    <div class="search-input">
+      <input type="text" name="search" class="form-control" placeholder="Search for a module...">
+    </div>
+
+    <div class="filter-region">
+      Region: 
+      <select id="regionID">
+        <option value="" selected="selected">All</option> 
+        <option value="Southeast Asia">Southeast Asia</option>
+        <option value="Others">Others</option>
+      </select>
+    </div>
+      
+    <div class="filter-PU">
+      Partner university:
+      <select id="partnerUniID">
+        <option value="" selected="selected">All</option> 
+        <option value="Nanyang Technical University">NTU</option>
+        <option value="Others">Others</option>
+      </select>
     </div>
   </div>
 
