@@ -9,7 +9,7 @@ Meteor.publish('modules', function(PUField, regionField, search) {
     let regex = new RegExp(search, 'i');
 
     if (!!PUField){
-      query["PUModuleCode"] = PUField;
+      query["UniversityName"] = PUField;
     }
 
     if (!!regionField){
