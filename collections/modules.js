@@ -1,3 +1,4 @@
+import { Meteor } from 'meteor/meteor';
 Modules = new Mongo.Collection('modules');
 
 if (Meteor.isServer) {
@@ -79,6 +80,6 @@ Meteor.startup(function() {
 */
 
 if (Modules.find().count() === 0) {
-  var data = JSON.parse(Assets.getText("NTUComparisons.json"));
+  let data = JSON.parse(Assets.getText("NTUComparisons.json"));
   data.forEach((module) => { Modules.insert(module); });
 }

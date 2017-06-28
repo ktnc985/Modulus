@@ -1,7 +1,10 @@
-Template.search.onCreated(() => {
-  let template = Template.instance();
+import { Template } from 'meteor/templating';
+import { ReactiveVar } from 'meteor/reactive-var';
 
-  template.searchQuery = new ReactiveVar(); //holds current value of search input
+Template.search.onCreated(() => {
+  const template = Template.instance();
+
+  template.searchQuery = new ReactiveVar(); // holds current value of search input
   template.searching = new ReactiveVar(false);
   template.regionField = new ReactiveVar();
   template.PUField = new ReactiveVar();
@@ -10,7 +13,7 @@ Template.search.onCreated(() => {
     template.subscribe('modules', template.PUField.get(), template.regionField.get(), template.searchQuery.get(), () => {
       setTimeout(() => {
         template.searching.set(false);
-      }, 300, );
+      }, 300);
     });
   });
 });
@@ -23,7 +26,7 @@ Template.search.helpers({
     return Template.instance().searchQuery.get();
   },
   modules() {
-    let modules = Modules.find();
+    const modules = Modules.find();
     if (modules) {
       return modules;
     }
@@ -34,7 +37,7 @@ Template.search.helpers({
 
 Template.search.events({
   'keyup [name="search"]'(event, template) {
-    let value = event.target.value.trim();
+    const value = event.target.value.trim();
     event.preventDefault();
 
     if (value !== '' && event.keyCode === 13) {
@@ -46,13 +49,12 @@ Template.search.events({
       template.searchQuery.set(value);
     }
   },
-  
   'change #regionID': function(event, template) {
-    let selectedField = template.$("#regionID").val();
+    const selectedField = template.$('#regionID').val();
     template.regionField.set(selectedField);
   },
-  'change #partnerUniID': function(event,template) {
-    let selectedField = template.$("#partnerUniID").val();
+  'change #partnerUniID': function(event, template) {
+    const selectedField = template.$('#partnerUniID').val();
     template.PUField.set(selectedField);
   },
 });
