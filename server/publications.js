@@ -13,7 +13,7 @@ Meteor.publish('modules', function(PUField, regionField, search) {
   if (search) {
     let regex = new RegExp(search, 'i');
 
-    if (!!PUField) {
+    if (!!PUField){
       query['UniversityName'] = PUField;
     }
 

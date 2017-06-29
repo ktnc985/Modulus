@@ -1,8 +1,9 @@
 import { Meteor } from 'meteor/meteor';
+
 Modules = new Mongo.Collection('modules');
 
 if (Meteor.isServer) {
-  Modules._ensureIndex({ NUSModuleCode: 1});
+  Modules._ensureIndex({ NUSModuleCode: 1 });
 }
 
 Modules.allow({
