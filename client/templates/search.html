@@ -1,5 +1,5 @@
 <template name="search">
-  <div class="search-container">
+  <nav class="search-container">
     <div class="search-input">
       <input type="text" name="search" class="form-control" placeholder="Search for a module...">
     </div>
@@ -21,9 +21,19 @@
         <option value="Others">Others</option>
       </select>
     </div>
+  </nav>
+
+  <div class= "searched-mod">
+      <h2>{{query}}</h2> <!-- not {{query}}, grab from nus mods collection to standardise case -->
+      <!--
+      {mod code} {mod name}
+      {mod description}
+      -->
+
   </div>
 
   <ul class="list-group">
+    <h3 class="results-header">Results</h3>
     {{#if searching}}
       {{> loading}}
     {{else}}

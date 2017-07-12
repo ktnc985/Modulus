@@ -8,7 +8,7 @@ Meteor.publish('modules', function(PUField, regionField, search) {
   check(PUField, Match.OneOf(String, null, undefined));
 
   let query = {};
-  const projection = { limit: 10, sort: { PrevMatch: -1, Similarity: -1 } };
+  const projection = { limit: 10, sort: [['PrevMatch', 'desc'], ['Similarity', 'desc']] };
   // sort in descending order according to Similarity field
   if (search) {
     let regex = new RegExp(search, 'i');
@@ -25,6 +25,6 @@ Meteor.publish('modules', function(PUField, regionField, search) {
 
     projection.limit = 100;
   }
-
+  
   return Modules.find(query, projection);
 });
