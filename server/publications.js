@@ -11,7 +11,7 @@ Meteor.publish('modules', function(PUField, regionField, search) {
   const projection = { limit: 10, sort: [['PrevMatch', 'desc'], ['Similarity', 'desc']] };
   // sort in descending order according to Similarity field
   if (search) {
-    let regex = new RegExp(search, 'i');
+    let regex = new RegExp(`^`+search+`$`, 'i'); //search for PU modules that are mapped exactly to the NUS module code entered by user
 
     if (PUField) {
       query['UniversityName'] = PUField;
@@ -25,6 +25,6 @@ Meteor.publish('modules', function(PUField, regionField, search) {
 
     projection.limit = 100;
   }
-  
+
   return Modules.find(query, projection);
 });
