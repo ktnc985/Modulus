@@ -42,7 +42,6 @@ body {
 .filter-region {
   z-index: 2;
   color: white;
-  /*float: right;*/
   position: absolute;
   top: 17px;
   left: 1000px;
@@ -53,7 +52,6 @@ body {
 .filter-PU {
   z-index: 2;
   color: white;
-  /*float: right;*/
   position: absolute;
   top: 17px;
   left: 680px;
