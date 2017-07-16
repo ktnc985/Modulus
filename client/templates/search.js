@@ -3,7 +3,7 @@ import { ReactiveVar } from 'meteor/reactive-var';
 
 var requestedLimit = 10;
 
-Template.results.onCreated(() => {
+Template.search.onCreated(() => {
 
   const template = Template.instance();
 
@@ -22,7 +22,7 @@ Template.results.onCreated(() => {
   });
 });
 
-Template.results.helpers({
+Template.search.helpers({
   searching() {
     return Template.instance().searching.get();
   },
@@ -39,7 +39,7 @@ Template.results.helpers({
 
 });
 
-Template.results.events({
+Template.search.events({
   'keyup [name="search"]'(event, template) {
     const value = event.target.value.trim();
     event.preventDefault();

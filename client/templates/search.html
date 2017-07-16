@@ -22,4 +22,29 @@
       </select>
     </div>
   </nav>
+
+  <div class= "searched-mod">
+      <h2>{{query}}</h2> <!-- not {{query}}, grab from nus mods collection to standardise case -->
+      <!--
+      {mod code} {mod name}
+      {mod description}
+      -->
+
+  </div>
+
+  <ul class="list-group">
+    <h3 class="results-header"> Results </h3>
+    {{#if searching}}
+      {{> loading}}
+    {{else}}
+      {{#each module in modules}}
+        {{> mapping module}}
+      {{else}}
+        <p class="alert alert-warning">Nothing found for {{query}}.</p>
+      {{/each}}
+
+      <button class="btn btn-block">Load More</button>
+      
+    {{/if}}
+  </ul>
 </template>
