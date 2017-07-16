@@ -1,16 +1,20 @@
 import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
 
-Template.search.onCreated(() => {
+var requestedLimit = 10;
+
+Template.results.onCreated(() => {
+
   const template = Template.instance();
 
   template.searchQuery = new ReactiveVar(); // holds current value of search input
   template.searching = new ReactiveVar(false);
   template.regionField = new ReactiveVar();
   template.PUField = new ReactiveVar();
+  template.limit = new ReactiveVar(requestedLimit);
 
   template.autorun(() => {
-    template.subscribe('modules', template.PUField.get(), template.regionField.get(), template.searchQuery.get(), () => {
+    template.subscribe('modules', template.limit.get(), template.PUField.get(), template.regionField.get(), template.searchQuery.get(), () => {
       setTimeout(() => {
         template.searching.set(false);
       }, 300);
@@ -18,7 +22,7 @@ Template.search.onCreated(() => {
   });
 });
 
-Template.search.helpers({
+Template.results.helpers({
   searching() {
     return Template.instance().searching.get();
   },
@@ -35,7 +39,7 @@ Template.search.helpers({
 
 });
 
-Template.search.events({
+Template.results.events({
   'keyup [name="search"]'(event, template) {
     const value = event.target.value.trim();
     event.preventDefault();
@@ -48,6 +52,7 @@ Template.search.events({
     if (value === '') {
       template.searchQuery.set(value);
     }
+    template.limit.set(requestedLimit);
   },
   'change #regionID': function(event, template) {
     const selectedField = template.$('#regionID').val();
@@ -57,4 +62,7 @@ Template.search.events({
     const selectedField = template.$('#partnerUniID').val();
     template.PUField.set(selectedField);
   },
+  'click .btn': function(event, template){
+    template.limit.set(requestedLimit * 2);
+  }
 });
