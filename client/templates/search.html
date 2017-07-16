@@ -3,9 +3,9 @@
     <div class="search-input">
       <input type="text" name="search" class="form-control" placeholder="Search for a module...">
     </div>
-
+    
     <div class="filter-region">
-      Region: 
+      Region: &nbsp;
       <select id="regionID">
         <option value="" selected="selected">All</option> 
         <option value="Southeast Asia">Southeast Asia</option>
@@ -14,7 +14,7 @@
     </div>
       
     <div class="filter-PU">
-      Partner university:
+      Partner university: &nbsp;
       <select id="partnerUniID">
         <option value="" selected="selected">All</option> 
         <option value="Nanyang Technological University">Nanyang Technological University</option>
@@ -22,26 +22,4 @@
       </select>
     </div>
   </nav>
-
-  <div class= "searched-mod">
-      <h2>{{query}}</h2> <!-- not {{query}}, grab from nus mods collection to standardise case -->
-      <!--
-      {mod code} {mod name}
-      {mod description}
-      -->
-
-  </div>
-
-  <ul class="list-group">
-    <h3 class="results-header">Results</h3>
-    {{#if searching}}
-      {{> loading}}
-    {{else}}
-      {{#each module in modules}}
-        {{> mapping module}}
-      {{else}}
-        <p class="alert alert-warning">Nothing found for {{query}}.</p>
-      {{/each}}
-    {{/if}}
-  </ul>
 </template>
