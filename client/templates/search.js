@@ -12,9 +12,11 @@ Template.search.onCreated(() => {
   template.regionField = new ReactiveVar();
   template.PUField = new ReactiveVar();
   template.limit = new ReactiveVar(requestedLimit);
+  template.startUp = new ReactiveVar(true);
+  template.hasMods = new ReactiveVar(false);
 
   template.autorun(() => {
-    template.subscribe('modules', template.limit.get(), template.PUField.get(), template.regionField.get(), template.searchQuery.get(), () => {
+    template.subscribe('modules', template.startUp.get(), template.limit.get(), template.PUField.get(), template.regionField.get(), template.searchQuery.get(), () => {
       setTimeout(() => {
         template.searching.set(false);
       }, 300);
@@ -32,11 +34,25 @@ Template.search.helpers({
   modules() {
     const modules = Modules.find();
     if (modules) {
+      Template.instance().hasMods.set(true);
       return modules;
+    }
+    Template.instance().hasMods.set(false);
+    return null;
+  },
+  noSearch() {
+    return Template.instance().startUp.get();
+  },
+  nusmods() {
+    const NUSModule = NUSMods.find();
+    if (NUSModule) {
+      return NUSModule;
     }
     return null;
   },
-
+  hasModules() {
+    return Template.instance().hasMods.get();
+  },
 });
 
 Template.search.events({
@@ -47,10 +63,12 @@ Template.search.events({
     if (value !== '' && event.keyCode === 13) {
       template.searchQuery.set(value);
       template.searching.set(true);
+      template.startUp.set(false);
     }
 
     if (value === '') {
       template.searchQuery.set(value);
+      template.startUp.set(true);
     }
     template.limit.set(requestedLimit);
   },

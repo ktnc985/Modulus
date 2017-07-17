@@ -2,10 +2,24 @@ import { Meteor } from 'meteor/meteor';
 import { Mongo } from 'meteor/mongo';
 
 Modules = new Mongo.Collection('modules');
+NUSMods = new Mongo.Collection('nusmods');
 
 if (Meteor.isServer) {
   Modules._ensureIndex({ NUSModuleCode: 1 });
+  NUSMods._ensureIndex({ ModuleCode: 1 });
 }
+
+NUSMods.allow({
+  insert: () => false,
+  update: () => false,
+  remove: () => false,
+});
+
+NUSMods.deny({
+  insert: () => true,
+  update: () => true,
+  remove: () => true,
+});
 
 Modules.allow({
   insert: () => false,
@@ -17,6 +31,24 @@ Modules.deny({
   insert: () => true,
   update: () => true,
   remove: () => true,
+});
+
+const NUSModsSchema = new SimpleSchema({
+  ModuleCode: {
+    type: String,
+    defaultValue: '',
+    label: 'NUS Module Code',
+  },
+  ModuleTitle: {
+    type: String,
+    defaultValue: '',
+    label: 'NUS Module Title',
+  },
+  ModuleDescription: {
+    type: String,
+    defaultValue: '',
+    label: 'NUS Module Description',
+  },
 });
 
 const ModulesSchema = new SimpleSchema({
@@ -67,9 +99,15 @@ const ModulesSchema = new SimpleSchema({
   },
 });
 
+NUSMods.attachSchema(NUSModsSchema);
 Modules.attachSchema(ModulesSchema);
 
 if (Modules.find().count() === 0) {
   const data = JSON.parse(Assets.getText('NTUComparisons.json'));
   data.forEach((module) => { Modules.insert(module); });
+}
+
+if (NUSMods.find().count() === 0) {
+  const data = JSON.parse(Assets.getText('NUS_SOC_MODS.json'));
+  data.forEach((module) => { NUSMods.insert(module); });
 }

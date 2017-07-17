@@ -1,6 +1,7 @@
 <template name="search">
   <nav class="search-container">
     <div class="search-input">
+    <span class="glyphicon glyphicon-search"></span>
       <input type="text" name="search" class="form-control" placeholder="Search for a module...">
     </div>
     
@@ -23,13 +24,20 @@
     </div>
   </nav>
 
-  <div class= "searched-mod">
-      <h2>{{query}}</h2> <!-- not {{query}}, grab from nus mods collection to standardise case -->
-      <!--
-      {mod code} {mod name}
-      {mod description}
-      -->
+  {{#if noSearch}}
+    {{>startUp}}
+  {{else}}
+    {{loadResults}}
+  {{/if}}
 
+  <div class= "searched-mod">
+    {{#if searching}}
+      {{> loading}}
+    {{else}}
+      {{#each module in nusmods}}
+        {{> nus module}}
+      {{/each}}
+    {{/if}}
   </div>
 
   <ul class="list-group">
@@ -42,8 +50,9 @@
       {{else}}
         <p class="alert alert-warning">Nothing found for {{query}}.</p>
       {{/each}}
-
-      <button class="btn btn-block">Load More</button>
+      {{#if hasModules}}
+        <button class="btn btn-block">Load More</button>
+      {{/if}}
       
     {{/if}}
   </ul>
