@@ -22,3 +22,4 @@ reactive-dict
 iron:router
 twbs:bootstrap
 check
+tmeasday:publish-counts
