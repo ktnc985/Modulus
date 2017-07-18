@@ -2,8 +2,9 @@ import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
 
 var requestedLimit = 10;
+var incr = 10;
 
-Template.search.onCreated(() => {
+Template.search.onCreated(function() {
 
   const template = Template.instance();
 
@@ -13,11 +14,11 @@ Template.search.onCreated(() => {
   template.PUField = new ReactiveVar();
   template.limit = new ReactiveVar(requestedLimit);
   template.startUp = new ReactiveVar(true);
-  template.hasMods = new ReactiveVar(false);
+  template.hasMods = new ReactiveVar();
 
-  template.autorun(() => {
-    template.subscribe('modules', template.startUp.get(), template.limit.get(), template.PUField.get(), template.regionField.get(), template.searchQuery.get(), () => {
-      setTimeout(() => {
+  template.autorun(function() {
+    template.subscribe('modules', template.startUp.get(), template.limit.get(), template.PUField.get(), template.regionField.get(), template.searchQuery.get(), function() {
+      setTimeout(function() {
         template.searching.set(false);
       }, 300);
     });
@@ -34,10 +35,8 @@ Template.search.helpers({
   modules() {
     const modules = Modules.find();
     if (modules) {
-      Template.instance().hasMods.set(true);
       return modules;
     }
-    Template.instance().hasMods.set(false);
     return null;
   },
   noSearch() {
@@ -52,6 +51,12 @@ Template.search.helpers({
   },
   hasModules() {
     return Template.instance().hasMods.get();
+  },
+  notToLoadMore() {
+    Template.instance().hasMods.set(false);
+  },
+  toLoadMore() {
+    Template.instance().hasMods.set(true);
   },
 });
 
@@ -70,7 +75,8 @@ Template.search.events({
       template.searchQuery.set(value);
       template.startUp.set(true);
     }
-    template.limit.set(requestedLimit);
+
+    requestedLimit = 10;
   },
   'change #regionID': function(event, template) {
     const selectedField = template.$('#regionID').val();
@@ -81,6 +87,16 @@ Template.search.events({
     template.PUField.set(selectedField);
   },
   'click .btn': function(event, template){
-    template.limit.set(requestedLimit * 2);
-  }
+    let count = Counts.get('results-counter');
+    if (count % 10 != 0) {
+        count = count - (count % 10) + 10;
+    }
+    if (count > requestedLimit) {
+      requestedLimit += incr;
+      template.limit.set(requestedLimit);
+    }
+    else {
+      template.hasMods.set(false);
+    }
+  },
 });

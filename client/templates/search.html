@@ -19,15 +19,12 @@
       <select id="partnerUniID">
         <option value="" selected="selected">All</option> 
         <option value="Nanyang Technological University">Nanyang Technological University</option>
-        <option value="Others">Others</option>
       </select>
     </div>
   </nav>
 
   {{#if noSearch}}
     {{>startUp}}
-  {{else}}
-    {{loadResults}}
   {{/if}}
 
   <div class= "searched-mod">
@@ -45,13 +42,16 @@
     {{#if searching}}
       {{> loading}}
     {{else}}
+      {{toLoadMore}}
       {{#each module in modules}}
         {{> mapping module}}
       {{else}}
+        {{notToLoadMore}}
         <p class="alert alert-warning">Nothing found for {{query}}.</p>
       {{/each}}
+
       {{#if hasModules}}
-        <button class="btn btn-block">Load More</button>
+        {{> loadMore}}
       {{/if}}
       
     {{/if}}
