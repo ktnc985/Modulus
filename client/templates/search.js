@@ -77,6 +77,7 @@ Template.search.events({
     }
 
     requestedLimit = 10;
+    template.limit.set(requestedLimit);
   },
   'change #regionID': function(event, template) {
     const selectedField = template.$('#regionID').val();
@@ -88,6 +89,7 @@ Template.search.events({
   },
   'click .btn': function(event, template){
     let count = Counts.get('results-counter');
+    
     if (count % 10 != 0) {
         count = count - (count % 10) + 10;
     }

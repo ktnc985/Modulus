@@ -28,10 +28,8 @@ Meteor.publish('modules', function(startUp, limit, PUField, regionField, search)
     }
 
     query['NUSModuleCode'] = regex;
-
-    projection.limit = limit;
   }
-  
+
   Counts.publish(this, 'results-counter', Modules.find(query, projection));
 
   return [NUSMods.find({'ModuleCode': regex}), Modules.find(query, projection)];
