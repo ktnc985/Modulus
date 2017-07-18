@@ -19,7 +19,6 @@ shell-server@0.2.3            # Server-side component of the `meteor shell` comm
 
 aldeed:collection2
 reactive-dict
-iron:router
 twbs:bootstrap
 check
 tmeasday:publish-counts
