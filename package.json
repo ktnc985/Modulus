@@ -3,7 +3,8 @@
   "private": true,
   "scripts": {
     "lint": "eslint .",
-    "pretest": "npm run lint --silent"
+    "pretest": "npm run lint --silent",
+    "start": "meteor run"
   },
   "dependencies": {
     "babel-runtime": "^6.23.0",
