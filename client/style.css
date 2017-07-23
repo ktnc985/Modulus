@@ -30,14 +30,14 @@ body {
   display: block;
   margin: auto;
   max-width: calc(100% - 30px);
-  background-color: #F27A7B;
   color: white;
+  background-color: #456990;
 }
 
 .btn:hover {
   color: white;
-  border-color: #DC6263;
-  background-color: #DC6263;
+  border-color: #0090C1;
+  background-color: #0090C1;
 }
 
 .top-bar {
@@ -54,21 +54,21 @@ body {
 }
 
 .filter-region {
-  z-index: 2;
+  z-index: 4;
   color: white;
   position: fixed;
   top: 17px;
-  left: 1010px;
+  left: 870px;
   padding-left: 5px;
   white-space: nowrap;
 }
 
 .filter-PU {
-  z-index: 2;
+  z-index: 4;
   color: white;
   position: fixed;
   top: 17px;
-  left: 750px;
+  left: 600px;
   padding-left: 5px;
   padding-right: 20px;
   white-space: nowrap;
@@ -189,7 +189,7 @@ span {
   position: fixed;
   width: 40%;
   height: calc(100% - 60px);
-  background-color: #E7E6F7;
+  background-color: #E9EEF2;
   padding: 10px;
   padding-bottom: 0px;
   top: 60px;
@@ -246,7 +246,7 @@ span {
   position: fixed;
   width: 40%;
   height: calc(100% - 60px);
-  background-color: #E7E6F7;
+  background-color: #E9EEF2;
   margin-top: 60px;
   padding: 30px;
   padding-top: 137px;
@@ -294,9 +294,28 @@ span {
 }
 
 h2 {
-  font-size: 30px;
+  font-size: 33px;
 }
 
 h3 {
-  font-size: 20px;
+  font-size: 17px;
+}
+
+.toggleFilter {
+  font-family: 'Open Sans', helvetica, arial, sans-serif;
+  z-index: 4;
+  position: fixed;
+  color: white; 
+  border: 0px solid #0090C1;
+  background-color: #456990;
+  font-size: 15px;
+  width: 70px;
+  height: 32px;
+  left: 500px;
+  top: 15px;
+}
+
+.toggleFilter:hover {
+    background-color: #0090C1;
+    color: white;
 }

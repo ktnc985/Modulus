@@ -15,6 +15,7 @@ Template.search.onCreated(function() {
   template.limit = new ReactiveVar(requestedLimit);
   template.startUp = new ReactiveVar(true);
   template.hasMods = new ReactiveVar();
+  template.visibility = new ReactiveVar(true);
 
   template.autorun(function() {
     template.subscribe('modules', template.startUp.get(), template.limit.get(), template.PUField.get(), template.regionField.get(), template.searchQuery.get(), function() {
@@ -58,6 +59,9 @@ Template.search.helpers({
   toLoadMore() {
     Template.instance().hasMods.set(true);
   },
+  filterVisibility() {
+    return Template.instance().visibility.get();
+  }
 });
 
 Template.search.events({
@@ -101,4 +105,8 @@ Template.search.events({
       template.hasMods.set(false);
     }
   },
+  'click .toggleFilter': function(event, template){
+      template.visibility.set(!template.visibility.get());
+  },
 });
+
