@@ -69,7 +69,7 @@ Template.search.events({
     const value = event.target.value.trim();
     event.preventDefault();
 
-    if (value !== '' && event.keyCode === 13) {
+    if (value !== '' && value !== template.searchQuery.get() && event.keyCode === 13) { // starts a search when text is entered and prevents infinite loading
       template.searchQuery.set(value);
       template.searching.set(true);
       template.startUp.set(false);
