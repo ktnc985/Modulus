@@ -49,6 +49,16 @@ const NUSModsSchema = new SimpleSchema({
     defaultValue: '',
     label: 'NUS Module Description',
   },
+  Department: {
+    type: String,
+    defaultValue: '',
+    label: 'NUS Module Department',
+  },
+  ModuleCredit: {
+    type: String,
+    defaultValue: '',
+    label: 'NUS Module Credit',
+  },
 });
 
 const ModulesSchema = new SimpleSchema({
