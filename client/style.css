@@ -48,11 +48,6 @@ body {
   z-index: 1;
 }
 
-.top-bar > img {
-  position: relative;
-  top: -5px;
-}
-
 .filter-region {
   z-index: 4;
   color: white;
@@ -264,7 +259,7 @@ span {
   width: calc(100% - 40%);
   height: calc(100% - 60px);
   margin-top: 60px;
-  padding-top: 200px;
+  padding-top: 50px;
   left: calc(100% - 60%);
   background-color: white;
   display: block;
@@ -280,7 +275,7 @@ span {
             animation: fadein 2s;
 }
 
-.startUp-PU h2, .startUp-PU h3{
+.startUp-PU h2, .startUp-PU h3, .sample {
     -webkit-animation: fadein 2s; /* Safari, Chrome and Opera > 12.1 */
        -moz-animation: fadein 2s; /* Firefox < 16 */
         -ms-animation: fadein 2s; /* Internet Explorer */
@@ -288,6 +283,28 @@ span {
             animation: fadein 2s;
 }
 
+.sample {
+  z-index: 3;
+  position: fixed;
+  display: inline-block;
+  width: calc(100% - 40%);
+  height: calc(100% - 60px);
+  margin-top: 30px;
+  left: calc(100% - 60%);
+  text-align: left;
+}
+
+.sample h3 {
+  text-align: center;
+  padding-bottom: 25px;
+  font-size: 15.5px;
+}
+
+.sample #sample-ok {
+  position: relative;
+  font-size: 20px;
+  left: 0px;
+}
 @keyframes fadein {
     from { opacity: 0; }
     to   { opacity: 1; }
