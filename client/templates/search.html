@@ -2,7 +2,7 @@
   <nav class="search-container">
     <div class="search-input">
     <span class="glyphicon glyphicon-search"></span>
-      <input type="text" name="search" class="form-control" placeholder="Search for a module...">
+    {{> inputAutocomplete settings=settings id="searchBox" class="input-xlarge" placeholder="Search for a module..."}}
     </div>
 
       <button class="toggleFilter">Filters</button>
@@ -20,9 +20,9 @@
     {{#if searching}}
       {{> loading}}
     {{else}}
-      {{#each module in nusmods}}
-        {{> nus module}}
-      {{/each}}
+      {{#if getMod}}
+        {{> nus getMod}}
+      {{/if}}
     {{/if}}
   </div>
 
@@ -45,4 +45,8 @@
       
     {{/if}}
   </ul>
+</template>
+
+<template name="eachItem">
+    <span class="label" style="color:black; font-size: 12px; font-family: 'Open Sans'">{{ModuleCode}}</span>
 </template>

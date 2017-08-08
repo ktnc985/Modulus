@@ -16,6 +16,7 @@ Template.search.onCreated(function() {
   template.startUp = new ReactiveVar(true);
   template.hasMods = new ReactiveVar();
   template.visibility = new ReactiveVar(false);
+  template.module = new ReactiveVar();
 
   template.autorun(function() {
     template.subscribe('modules', template.startUp.get(), template.limit.get(), template.PUField.get(), template.regionField.get(), template.searchQuery.get(), function() {
@@ -23,6 +24,7 @@ Template.search.onCreated(function() {
         template.searching.set(false);
       }, 300);
     });
+    template.subscribe('nusmods');
   });
 });
 
@@ -61,24 +63,32 @@ Template.search.helpers({
   },
   filterVisibility() {
     return Template.instance().visibility.get();
-  }
+  },
+  settings() {
+    return {
+      position: "bottom",
+      limit: 5,
+      rules: [
+        {
+          collection: NUSMods,
+          field: "ModuleCode",
+          template: Template.eachItem
+        },
+      ]
+    };
+  },
+  getMod() {
+    return Template.instance().module.get();
+  },
 });
 
 Template.search.events({
-  'keyup [name="search"]'(event, template) {
-    const value = event.target.value.trim();
-    event.preventDefault();
-
-    if (value !== '' && value !== template.searchQuery.get() && event.keyCode === 13) { // starts a search when text is entered and prevents infinite loading
-      template.searchQuery.set(value);
+  "autocompleteselect input": function(event, template, doc) {
+    template.module.set(doc);
+    let value = doc.ModuleCode;
+    template.searchQuery.set(value);
       template.searching.set(true);
       template.startUp.set(false);
-    }
-
-    if (value === '') {
-      template.searchQuery.set(value);
-      template.startUp.set(true);
-    }
 
     requestedLimit = 10;
     template.limit.set(requestedLimit);

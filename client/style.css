@@ -119,6 +119,10 @@ body {
   outline: none;
 }
 
+.-autocomplete-container {
+    margin-top: 10px;
+}
+
 .alert-warning{
   position: relative;
   margin-left: 15px;
@@ -176,7 +180,8 @@ span {
   position: fixed;
   top: 13px;
   left: 235px;
-  z-index: 2;
+  z-index: 4;
+  display: block;
 }
 
 .searched-mod {
