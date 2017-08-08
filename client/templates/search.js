@@ -16,7 +16,7 @@ Template.search.onCreated(function() {
   template.startUp = new ReactiveVar(true);
   template.hasMods = new ReactiveVar();
   template.visibility = new ReactiveVar(false);
-  template.module = new ReactiveVar();
+  template.module = new ReactiveVar(null);
 
   template.autorun(function() {
     template.subscribe('modules', template.startUp.get(), template.limit.get(), template.PUField.get(), template.regionField.get(), template.searchQuery.get(), function() {
@@ -84,14 +84,23 @@ Template.search.helpers({
 
 Template.search.events({
   "autocompleteselect input": function(event, template, doc) {
-    template.module.set(doc);
-    let value = doc.ModuleCode;
-    template.searchQuery.set(value);
-      template.searching.set(true);
-      template.startUp.set(false);
+    if (doc !== undefined) {
+      let value = doc.ModuleCode;
+      if (value !== '' && !_.isEqual(doc, template.module.get())) { // starts a search when text is entered and prevents infinite loading
+        template.searchQuery.set(value);
+        template.searching.set(true);
+        template.startUp.set(false);
+        template.module.set(doc);
+      }
 
-    requestedLimit = 10;
-    template.limit.set(requestedLimit);
+      if (value === '') {
+        template.searchQuery.set(value);
+        template.startUp.set(true);
+      }
+
+      requestedLimit = 10;
+      template.limit.set(requestedLimit);
+    }
   },
   'change #regionID': function(event, template) {
     const selectedField = template.$('#regionID').val();
