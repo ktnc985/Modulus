@@ -119,8 +119,22 @@ body {
   outline: none;
 }
 
+/*overwrite css of mizzao:autocomplete package*/
 .-autocomplete-container {
-    margin-top: 10px;
+    min-width: 220px;
+    margin-top: 12px;
+    width: auto !important;
+    min-height: 35px;
+    line-height: 0.5em;
+}
+
+.-autocomplete-item {
+    padding: 3px 10px;
+    height: 35px !important;
+}
+
+.-autocomplete-item.selected {
+    background: #5597D8;
 }
 
 .alert-warning{

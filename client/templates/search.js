@@ -72,7 +72,8 @@ Template.search.helpers({
         {
           collection: NUSMods,
           field: "ModuleCode",
-          template: Template.eachItem
+          template: Template.eachItem,
+          noMatchTemplate: Template.noMatch
         },
       ]
     };
@@ -83,7 +84,7 @@ Template.search.helpers({
 });
 
 Template.search.events({
-  "autocompleteselect input": function(event, template, doc) {
+  'autocompleteselect input': function(event, template, doc) {
     if (doc !== undefined) {
       let value = doc.ModuleCode;
       if (value !== '' && !_.isEqual(doc, template.module.get())) { // starts a search when text is entered and prevents infinite loading
@@ -110,7 +111,7 @@ Template.search.events({
     const selectedField = template.$('#partnerUniID').val();
     template.PUField.set(selectedField);
   },
-  'click .btn': function(event, template){
+  'click .btn-block': function(event, template){
     let count = Counts.get('results-counter');
     
     if (count % 10 != 0) {
