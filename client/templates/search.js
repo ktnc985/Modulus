@@ -1,26 +1,32 @@
 import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
+import { Counts } from 'meteor/tmeasday:publish-counts';
 
-var requestedLimit = 10;
-var incr = 10;
+// limit number of results loaded each time to requestedLimit
+let requestedLimit = 10;
+// increase number of results displayed by incr each time 'Load more' button is clicked
+const incr = 10;
 
 Template.search.onCreated(function() {
-
   const template = Template.instance();
 
-  template.searchQuery = new ReactiveVar(); // holds current value of search input
+  template.searchQuery = new ReactiveVar(); // stores current value of search input
   template.searching = new ReactiveVar(false);
-  template.regionField = new ReactiveVar();
-  template.PUField = new ReactiveVar();
+  template.regionField = new ReactiveVar(); // stores value of option selected in the Region filter
+                                            // field
+  template.PUField = new ReactiveVar(); // stores value of option selected in the PU filter field
   template.limit = new ReactiveVar(requestedLimit);
-  template.startUp = new ReactiveVar(true);
+  template.startUp = new ReactiveVar(true); // stores the state of the site to decide when to load
+                                            // start up page with instructions
   template.hasMods = new ReactiveVar();
   template.visibility = new ReactiveVar(false);
-  template.module = new ReactiveVar(null);
+  template.module = new ReactiveVar(null);  // stores module information of the NUS module selected
+                                            // in the search box
 
   template.autorun(function() {
     template.subscribe('modules', template.startUp.get(), template.limit.get(), template.PUField.get(), template.regionField.get(), template.searchQuery.get(), function() {
-      setTimeout(function() {
+      setTimeout(function() { // ensure that loading icon is displayed for at least
+                              // 300 milliseconds before results list is revealed
         template.searching.set(false);
       }, 300);
     });
@@ -66,16 +72,16 @@ Template.search.helpers({
   },
   settings() {
     return {
-      position: "bottom",
-      limit: 5,
+      position: 'bottom', // display autocomplete menu at the bottom of search box
+      limit: 5, // limit number of options displayed in autocomplete menu
       rules: [
         {
           collection: NUSMods,
-          field: "ModuleCode",
+          field: 'ModuleCode',
           template: Template.eachItem,
-          noMatchTemplate: Template.noMatch
+          noMatchTemplate: Template.noMatch,
         },
-      ]
+      ],
     };
   },
   getMod() {
@@ -84,9 +90,9 @@ Template.search.helpers({
 });
 
 Template.search.events({
-  'autocompleteselect input': function(event, template, doc) {
+  'autocompleteselect input'(event, template, doc) {
     if (doc !== undefined) {
-      let value = doc.ModuleCode;
+      const value = doc.ModuleCode;
       if (value !== '' && !_.isEqual(doc, template.module.get())) { // starts a search when text is entered and prevents infinite loading
         template.searchQuery.set(value);
         template.searching.set(true);
@@ -103,21 +109,22 @@ Template.search.events({
       template.limit.set(requestedLimit);
     }
   },
-  'change #regionID': function(event, template) {
+  'change #regionID'(event, template) {
     const selectedField = template.$('#regionID').val();
     template.regionField.set(selectedField);
   },
-  'change #partnerUniID': function(event, template) {
+  'change #partnerUniID'(event, template) {
     const selectedField = template.$('#partnerUniID').val();
     template.PUField.set(selectedField);
   },
-  'click .btn-block': function(event, template){
+  'click .btn-block'(event, template) {
     let count = Counts.get('results-counter');
-    
-    if (count % 10 != 0) {
-        count = count - (count % 10) + 10;
+
+    if (count % 10 !== 0) {
+      count = count - (count % 10) + 10;
     }
-    if (count > requestedLimit) {
+
+    if (count > requestedLimit) { // if there are more results to display
       requestedLimit += incr;
       template.limit.set(requestedLimit);
     }
@@ -125,8 +132,8 @@ Template.search.events({
       template.hasMods.set(false);
     }
   },
-  'click .toggleFilter': function(event, template){
-      template.visibility.set(!template.visibility.get());
+  'click .toggleFilter'(event, template) {
+    template.visibility.set(!template.visibility.get());
   },
 });
 
