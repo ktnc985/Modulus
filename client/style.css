@@ -48,6 +48,11 @@ body {
   z-index: 1;
 }
 
+img {
+  position: relative;
+  top: -5px;
+}
+
 .filter-region {
   z-index: 4;
   color: white;
